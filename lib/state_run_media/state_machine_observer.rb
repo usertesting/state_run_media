@@ -1,3 +1,5 @@
+require 'wisper'
+
 module StateRunMedia
   class StateMachineObserver
     class << self

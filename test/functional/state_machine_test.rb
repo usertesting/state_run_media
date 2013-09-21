@@ -1,7 +1,6 @@
 require File.expand_path(File.dirname(__FILE__) + '/../test_helper')
 require 'rubygems'
 require 'state_machine'
-require 'wisper'
 require 'state_run_media'
 
 class MyMinimalStateMachine
