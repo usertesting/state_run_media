@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/usertesting/state_run_media.png)](https://travis-ci.org/usertesting/state_run_media)
+
 # state_run_media
 
 Automatically publish events upon state transitions. All you have to do is subscribe.
