@@ -4,7 +4,7 @@ require 'state_machine'
 require 'state_run_media'
 
 class MyMinimalStateMachine
-  state_machine :foo, initial: :beginning_state do
+  state_machine :foo, :initial => :beginning_state do
     state :another_state
     event :change_something do
       transition :beginning_state => :another_state
