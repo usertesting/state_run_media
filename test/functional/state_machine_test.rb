@@ -2,29 +2,7 @@ require File.expand_path(File.dirname(__FILE__) + '/../test_helper')
 require 'rubygems'
 require 'state_machine'
 require 'wisper'
-
-module StateRunMedia
-  class StateMachineObserver
-    class << self
-      include Wisper::Publisher
-
-      def underscore(string)
-        word = string.dup
-        #word.gsub!(/::/, '_')
-        word.gsub!(/([A-Z]+)([A-Z][a-z])/,'\1_\2')
-        word.gsub!(/([a-z\d])([A-Z])/,'\1_\2')
-        #word.tr!("-", "_")
-        word.downcase!
-        word
-      end
-
-      def before_transition(object, transition)
-        name = [underscore(object.class.name), transition.attribute, transition.from_name, 'to', transition.to_name].join('_')
-        publish(name.to_sym, object)
-      end
-    end
-  end
-end
+require 'state_run_media'
 
 class StateMachine::Machine
   def after_initialize
@@ -32,7 +10,7 @@ class StateMachine::Machine
   end
 end
 
-class MyStateMachine
+class MyMinimalStateMachine
   state_machine :foo, initial: :beginning_state do
     state :another_state
     event :change_something do
@@ -48,19 +26,19 @@ class FooListener
     @call_log = []
   end
 
-  def my_state_machine_foo_beginning_state_to_another_state(*args)
-    @call_log << [:my_state_machine_foo_beginning_state_to_another_state, args]
+  def my_minimal_state_machine_foo_beginning_state_to_another_state(*args)
+    @call_log << [:my_minimal_state_machine_foo_beginning_state_to_another_state, args]
   end
 end
 
 class RegistrationTest < Test::Unit::TestCase
   def test_basic_transition_publishes
-    foo_machine = MyStateMachine.new
+    foo_machine = MyMinimalStateMachine.new
     listener = FooListener.new
     Wisper.with_listeners(listener) do
       foo_machine.change_something!
     end
-    assert_equal([[:my_state_machine_foo_beginning_state_to_another_state, [foo_machine]]], listener.call_log)
+    assert_equal([[:my_minimal_state_machine_foo_beginning_state_to_another_state, [foo_machine]]], listener.call_log)
   end
 end
 
