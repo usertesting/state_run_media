@@ -1,3 +1,4 @@
+[![Code Climate](https://codeclimate.com/github/usertesting/state_run_media.png)](https://codeclimate.com/github/usertesting/state_run_media)
 [![Build Status](https://travis-ci.org/usertesting/state_run_media.png)](https://travis-ci.org/usertesting/state_run_media)
 
 # state_run_media
